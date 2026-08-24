@@ -75,18 +75,25 @@
 // }
 // export default App;
 
+import { useState } from "react";
+
 import "./index.css";
+
 import ProfileCard from "./components/ProfileCard";
+import Counter from "./components/counter";
+import EmployeeForm from "./components/EmployeeForm";
 
 import nidhi from "./assets/nidhi.jpeg"
 import rahul from "./assets/rahul.jpeg"
 import priya from "./assets/priya.jpeg"
+import amit from "./assets/amit.jpeg"
 
-const employees = [
+const initialEmployees = [
   {
     id: 1,
     image: nidhi,
     name: "Nidhi Jariwala",
+    email: "jariwalanidhi28@gmail.com",
     role: "PHP Laravel Developer",
     experience: "1.8 Years",
     skills: "React, MySql",
@@ -98,6 +105,7 @@ const employees = [
     id: 2,
     image: rahul,
     name: "Rahul Sharma",
+    email: "rahul@gmail.com",
     role: "React Developer",
     experience: "1 Year",
     skills: "React, MySql, MongoDB",
@@ -109,6 +117,7 @@ const employees = [
     id: 3,
     image: priya,
     name: "Priya Patel",
+    email: "priya@gmail.com",
     role: "UI Designer",
     experience: "3 Years",
     skills: "Canva, Photoshop",
@@ -116,14 +125,124 @@ const employees = [
     isAvailable: true,
     buttonColor: "#9333ea",
   },
+  {
+    id: 4,
+    image: amit,
+    name: "Amit Shah",
+    email: "amit@gmail.com",
+    role: "Node.js Developer",
+    experience: "6 Months",
+    skills: "React, MongoDB, Express.js",
+    city: "Rajkot",
+    isAvailable: true,
+    buttonColor: "#eb2525",
+  },
 ]
 
 function App() {
+
+  const [employees, setEmployees] =
+    useState(initialEmployees);
+
+  const [search, setSearch] = useState("");
+
+  const handleAddEmployee = (newEmployee) => {
+    setEmployees((previousEmployees) => [
+      ...previousEmployees,
+      newEmployee
+    ]);
+  };
+
+  const handleDeleteEmployee = (employeeId) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this employee?"
+    );
+    if (!confirmDelete) {
+      return;
+    }
+    setEmployees((previousEmployees) =>
+      previousEmployees.filter(
+        (employee) => employee.id !== employeeId
+      )
+    );
+  };
+
+  const filteredEmployees = employees.filter((employee) => {
+    const searchText = search.toLowerCase();
+    return (
+      employee.name
+        .toLowerCase()
+        .includes(searchText) ||
+
+      employee.email
+        .toLowerCase()
+        .includes(searchText) ||
+
+      employee.role
+        .toLowerCase()
+        .includes(searchText) ||
+
+      employee.skills
+        .toLowerCase()
+        .includes(searchText) ||
+
+      employee.city
+        .toLowerCase()
+        .includes(searchText)
+    );
+  });
   return (
-    <div className="container">
-      {employees.map((employee) => (
-        <ProfileCard key={employee.id} employee={employee} />
-      ))}
+    <div className="app">
+      <h1 className="page-title">
+        Employee Management
+      </h1>
+
+      {/* Counter */}
+      <Counter />
+
+      {/* Add employee form */}
+
+      <EmployeeForm
+        onAddEmployee={handleAddEmployee}
+      />
+
+      {/* search employee */}
+
+      <div className="search-box">
+        <h2> Search Employee</h2>
+        <input
+          type="text"
+          value={search}
+          onChange={(e) =>
+            setSearch(e.target.value)
+          }
+          placeholder="Search by name, role, skills or city..."
+        />
+        <p className="search-result">
+          {filteredEmployees.length} employee
+          {filteredEmployees.length !== 1
+            ? "s"
+            : ""} found
+        </p>
+      </div>
+
+      {/* Employee Cards */}
+      <div className="container">
+        {filteredEmployees.length > 0 ? (
+          filteredEmployees.map((employee) => (
+            <ProfileCard
+              key={employee.id}
+              employee={employee}
+              onDeleteEmployee={handleDeleteEmployee}
+            />
+          ))
+        ) : (
+          <div className="no-result">
+            <h2>No Employee Found</h2>
+            <p>Try searching with another name, role or city</p>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

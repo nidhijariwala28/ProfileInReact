@@ -48,10 +48,16 @@
 // }
 // export default ProfileCard;
 
-function ProfileCard({ employee }) {
+import { useState } from "react";
+
+function ProfileCard({
+    employee,
+    onDeleteEmployee
+}) {
     const {
         image,
         name,
+        email,
         role,
         experience,
         skills,
@@ -60,19 +66,47 @@ function ProfileCard({ employee }) {
         buttonColor,
     } = employee;
 
+    const [isFavorite, setIsFavorite] = useState(false);
+
+    const [available, setAvailable] = useState(isAvailable);
+
     return (
         <div className="card">
-            <img src={image} alt={name} />
+            <img src={image} alt={name} className="profile-image" />
             <h1>{name}</h1>
+            <p className="email">{email}</p>
             <p className="role">{role}</p>
             <p className="experience">{experience}</p>
-            <p>{skills}</p>
+            <p className="skills">{skills}</p>
             <p className="city">📍 {city}</p>
-            <p>{isAvailable ? "🟢 Available" : "🔴 Not Available"}</p>
+            <p className={available ? "available" : "not-available"}>
+                {available
+                    ? "🟢 Available"
+                    : "🔴 Not Available"}
+            </p>
 
-            <button style={{ backgroundColor: buttonColor }}>
+            <button className="profile-button"
+                style={{ backgroundColor: buttonColor }}>
                 View Profile
             </button>
+
+            <button
+                className="favorite-button"
+                onClick={() => setIsFavorite(!isFavorite)}
+            >
+                {isFavorite
+                    ? "❤️ Favorited"
+                    : "🤍 Add Favorite"
+                }
+            </button>
+
+            <button
+                className="availability-button"
+                onClick={() => setAvailable(!available)}
+            >
+                Change Availability
+            </button>
+            <button className="delete-button" onClick={() => onDeleteEmployee(employee.id)}>Delete Employee</button>
         </div>
     );
 }

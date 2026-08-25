@@ -141,10 +141,11 @@ const initialEmployees = [
 
 function App() {
 
-  const [employees, setEmployees] =
-    useState(initialEmployees);
+  const [employees, setEmployees] = useState(initialEmployees);
 
   const [search, setSearch] = useState("");
+
+  const [editingEmployee, setEditingEmployee] = useState(null);
 
   const handleAddEmployee = (newEmployee) => {
     setEmployees((previousEmployees) => [
@@ -165,6 +166,30 @@ function App() {
         (employee) => employee.id !== employeeId
       )
     );
+  };
+
+  const handleEditEmployee = (employee) => {
+    setEditingEmployee(employee);
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  };
+
+  const handleUpdateEmployee = (updateEmployee) => {
+    setEmployees((previousEmployees) =>
+      previousEmployees.map((employee) =>
+        employee.id === updateEmployee.id
+          ? updateEmployee
+          : employee
+      )
+    );
+    setEditingEmployee(null);
+  };
+
+  const handleCancelEdit = () => {
+    setEditingEmployee(null);
   };
 
   const filteredEmployees = employees.filter((employee) => {
@@ -204,6 +229,10 @@ function App() {
 
       <EmployeeForm
         onAddEmployee={handleAddEmployee}
+        editingEmployee={editingEmployee}
+        onUpdateEmployee={handleUpdateEmployee}
+        onCancelEdit={handleCancelEdit}
+
       />
 
       {/* search employee */}
@@ -234,6 +263,7 @@ function App() {
               key={employee.id}
               employee={employee}
               onDeleteEmployee={handleDeleteEmployee}
+              onEditEmployee={handleEditEmployee}
             />
           ))
         ) : (

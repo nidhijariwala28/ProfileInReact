@@ -52,7 +52,8 @@ import { useState } from "react";
 
 function ProfileCard({
     employee,
-    onDeleteEmployee
+    onDeleteEmployee,
+    onEditEmployee,
 }) {
     const {
         image,
@@ -70,6 +71,13 @@ function ProfileCard({
 
     const [available, setAvailable] = useState(isAvailable);
 
+    const handleEdit = () => {
+        onEditEmployee(employee);
+    };
+
+    const handleDelete = () => {
+        onDeleteEmployee(employee.id);
+    };
     return (
         <div className="card">
             <img src={image} alt={name} className="profile-image" />
@@ -106,6 +114,7 @@ function ProfileCard({
             >
                 Change Availability
             </button>
+            <button className="edit-button" onClick={handleEdit}>✏️ Edit Employee</button>
             <button className="delete-button" onClick={() => onDeleteEmployee(employee.id)}>Delete Employee</button>
         </div>
     );

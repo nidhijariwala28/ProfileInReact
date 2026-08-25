@@ -10,18 +10,18 @@ body {
   color: #111827;
 }
 
-/* =========================
-   Main App
-========================= */
+/* ============================= */
+/* APP */
+/* ============================= */
 
 .app {
   min-height: 100vh;
   padding: 40px 20px;
 }
 
-/* =========================
-   Page Title
-========================= */
+/* ============================= */
+/* PAGE TITLE */
+/* ============================= */
 
 .page-title {
   text-align: center;
@@ -29,9 +29,9 @@ body {
   font-size: 32px;
 }
 
-/* =========================
-   Counter
-========================= */
+/* ============================= */
+/* COUNTER */
+/* ============================= */
 
 .counter {
   width: 320px;
@@ -84,9 +84,9 @@ body {
   opacity: 0.85;
 }
 
-/* =========================
-   Employee Form
-========================= */
+/* ============================= */
+/* EMPLOYEE FORM */
+/* ============================= */
 
 .employee-form {
   width: 500px;
@@ -109,14 +109,14 @@ body {
 
 .form-group label {
   display: block;
-  font-weight: bold;
   margin-bottom: 6px;
+  font-weight: bold;
 }
 
 .form-group input {
   width: 100%;
-  padding: 11px;
-  border: 1px solid #ccc;
+  padding: 11px 12px;
+  border: 1px solid #d1d5db;
   border-radius: 8px;
   font-size: 15px;
   outline: none;
@@ -124,27 +124,52 @@ body {
 
 .form-group input:focus {
   border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+/* ============================= */
+/* FORM BUTTONS */
+/* ============================= */
+
+.form-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
 }
 
 .add-employee-button {
   width: 100%;
   border: none;
-  background: #2563eb;
-  color: white;
   padding: 12px;
   border-radius: 8px;
-  cursor: pointer;
+  background: #2563eb;
+  color: white;
   font-weight: bold;
-  font-size: 15px;
+  cursor: pointer;
 }
 
 .add-employee-button:hover {
   opacity: 0.85;
 }
 
-/* =========================
-   Search
-========================= */
+.cancel-button {
+  width: 100%;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  background: #6b7280;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.cancel-button:hover {
+  opacity: 0.85;
+}
+
+/* ============================= */
+/* SEARCH */
+/* ============================= */
 
 .search-box {
   width: 600px;
@@ -164,7 +189,7 @@ body {
 .search-box input {
   width: 100%;
   padding: 13px;
-  border: 1px solid #ccc;
+  border: 1px solid #d1d5db;
   border-radius: 8px;
   font-size: 16px;
   outline: none;
@@ -172,6 +197,7 @@ body {
 
 .search-box input:focus {
   border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
 }
 
 .search-result {
@@ -179,9 +205,9 @@ body {
   color: #555;
 }
 
-/* =========================
-   Employee Cards Container
-========================= */
+/* ============================= */
+/* EMPLOYEE CARDS CONTAINER */
+/* ============================= */
 
 .container {
   display: flex;
@@ -191,9 +217,9 @@ body {
   flex-wrap: wrap;
 }
 
-/* =========================
-   Employee Card
-========================= */
+/* ============================= */
+/* EMPLOYEE CARD */
+/* ============================= */
 
 .card {
   background: white;
@@ -209,9 +235,9 @@ body {
   transform: translateY(-5px);
 }
 
-/* =========================
-   Profile Image
-========================= */
+/* ============================= */
+/* PROFILE IMAGE */
+/* ============================= */
 
 .profile-image {
   width: 120px;
@@ -221,18 +247,18 @@ body {
   margin-bottom: 15px;
 }
 
-/* =========================
-   Employee Name
-========================= */
+/* ============================= */
+/* EMPLOYEE NAME */
+/* ============================= */
 
 .card h1 {
   font-size: 26px;
   margin-bottom: 8px;
 }
 
-/* =========================
-   Email
-========================= */
+/* ============================= */
+/* EMAIL */
+/* ============================= */
 
 .email {
   font-size: 14px;
@@ -241,43 +267,43 @@ body {
   word-break: break-word;
 }
 
-/* =========================
-   Role
-========================= */
+/* ============================= */
+/* ROLE */
+/* ============================= */
 
 .role {
   color: #2563eb;
   margin-bottom: 8px;
 }
 
-/* =========================
-   Experience
-========================= */
+/* ============================= */
+/* EXPERIENCE */
+/* ============================= */
 
 .experience {
   margin-bottom: 8px;
 }
 
-/* =========================
-   Skills
-========================= */
+/* ============================= */
+/* SKILLS */
+/* ============================= */
 
 .skills {
   margin-bottom: 6px;
 }
 
-/* =========================
-   City
-========================= */
+/* ============================= */
+/* CITY */
+/* ============================= */
 
 .city {
   color: #666;
   margin-bottom: 10px;
 }
 
-/* =========================
-   Availability
-========================= */
+/* ============================= */
+/* AVAILABILITY */
+/* ============================= */
 
 .available {
   color: green;
@@ -291,9 +317,9 @@ body {
   margin-bottom: 12px;
 }
 
-/* =========================
-   Common Button
-========================= */
+/* ============================= */
+/* COMMON CARD BUTTON */
+/* ============================= */
 
 .card button {
   width: 100%;
@@ -310,47 +336,51 @@ body {
   opacity: 0.85;
 }
 
-/* =========================
-   View Profile
-========================= */
+/* ============================= */
+/* VIEW PROFILE */
+/* ============================= */
 
 .profile-button {
   color: white;
 }
 
-/* =========================
-   Favorite
-========================= */
+/* ============================= */
+/* FAVORITE */
+/* ============================= */
 
 .favorite-button {
   background: #ec4899;
 }
 
-/* =========================
-   Availability
-========================= */
+/* ============================= */
+/* AVAILABILITY */
+/* ============================= */
 
 .availability-button {
   background: #374151;
 }
 
-/* =========================
-   Delete
-========================= */
+/* ============================= */
+/* EDIT */
+/* ============================= */
+
+.edit-button {
+  background: #f59e0b;
+}
+
+/* ============================= */
+/* DELETE */
+/* ============================= */
 
 .delete-button {
   background: #dc2626;
 }
 
-.delete-button:hover {
-  background: #b91c1c;
-}
+/* ============================= */
+/* NO SEARCH RESULTS */
+/* ============================= */
 
-/* =========================
-   No Search Result
-========================= */
-
-.no-result {
+.no-results {
   width: 100%;
   text-align: center;
   background: white;
@@ -359,17 +389,17 @@ body {
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
 }
 
-.no-result h2 {
+.no-results h2 {
   margin-bottom: 10px;
 }
 
-.no-result p {
+.no-results p {
   color: #666;
 }
 
-/* =========================
-   Mobile
-========================= */
+/* ============================= */
+/* MOBILE */
+/* ============================= */
 
 @media (max-width: 768px) {
 
@@ -398,4 +428,5 @@ body {
     width: 100%;
     max-width: 320px;
   }
+
 }

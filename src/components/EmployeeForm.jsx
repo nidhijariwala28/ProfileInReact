@@ -1,16 +1,61 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import darshan from "../assets/darshan.jpeg"
 
-function EmployeeForm({ onAddEmployee }) {
+function EmployeeForm({
+    onAddEmployee,
+    editingEmployee,
+    onUpdateEmployee,
+    onCancelEdit,
+}) {
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [role, setRole] = useState("");
+    const [experience, setExperience] = useState("");
+    const [skills, setSkills] = useState("");
     const [city, setCity] = useState("");
+
+    useEffect(() => {
+        if (editingEmployee) {
+            setName(editingEmployee.name);
+            setEmail(editingEmployee.email);
+            setRole(editingEmployee.role);
+            setExperience(editingEmployee.experience);
+            setSkills(editingEmployee.skills);
+            setCity(editingEmployee.city);
+        } else {
+            clearForm();
+        }
+    }, [editingEmployee]);
+
+    const clearForm = () => {
+        setName("");
+        setEmail("");
+        setRole("");
+        setExperience("");
+        setSkills("");
+        setCity("");
+    };
 
     const handleSubmit = (e) => {
 
         e.preventDefault();
+
+        if (editingEmployee) {
+            const updateEmployee = {
+                ...editingEmployee,
+
+                name: name,
+                email: email,
+                role: role,
+                experience: experience,
+                skills: skills,
+                city: city,
+            };
+            onUpdateEmployee(updateEmployee);
+
+            return;
+        }
 
         const newEmployee = {
             id: Date.now(),
@@ -29,16 +74,19 @@ function EmployeeForm({ onAddEmployee }) {
 
         // Clear form
 
-        setName("");
-        setEmail("");
-        setRole("");
-        setCity("");
+        clearForm();
+        // setName("");
+        // setEmail("");
+        // setRole("");
+        // setCity("");
     };
 
     return (
         <div className="employee-form">
 
-            <h2>Add Employee</h2>
+            <h2> {editingEmployee
+                ? "Edit Employee"
+                : "Add Employee"}</h2>
 
             <form onSubmit={handleSubmit}>
 
@@ -91,6 +139,36 @@ function EmployeeForm({ onAddEmployee }) {
 
                 <div className="form-group">
                     <label>
+                        Experience
+                    </label>
+                    <input
+                        type="text"
+                        value={experience}
+                        onChange={(e) =>
+                            setExperience(e.target.value)
+                        }
+                        placeholder="Enter employee experience"
+                        required
+                    />
+                </div>
+
+                <div className="form-group">
+                    <label>
+                        Skills
+                    </label>
+                    <input
+                        type="text"
+                        value={skills}
+                        onChange={(e) =>
+                            setSkills(e.target.value)
+                        }
+                        placeholder="Enter employee skills"
+                        required
+                    />
+                </div>
+
+                <div className="form-group">
+                    <label>
                         City
                     </label>
                     <input
@@ -104,14 +182,21 @@ function EmployeeForm({ onAddEmployee }) {
                     />
                 </div>
 
-                {/* submit */}
+                {/* Buttons */}
 
-                <button
-                    type="submit"
-                    className="add-employee-button"
-                >
-                    Add Employee
-                </button>
+                <div className="form-buttons">
+                    <button type="submit" className="add-employee-button">
+                        {editingEmployee
+                            ? "Update Employee"
+                            : "Add Employee"}
+                    </button>
+
+                    {editingEmployee && (
+                        <button type="button" className="cancel-button" onClick={onCancelEdit}>
+                            Cancel
+                        </button>  
+                    )}
+                </div>
             </form>
         </div>
     );

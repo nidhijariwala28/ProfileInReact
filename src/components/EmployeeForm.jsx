@@ -63,8 +63,8 @@ function EmployeeForm({
             name: name,
             email: email,
             role: role,
-            experience: "Fresher",
-            skills: "React",
+            experience: experience,
+            skills: skills,
             city: city,
             isAvailable: true,
             buttonColor: "#2563eb"

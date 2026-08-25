@@ -75,7 +75,7 @@
 // }
 // export default App;
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import "./index.css";
 
@@ -142,13 +142,28 @@ const initialEmployees = [
 
 function App() {
 
-  const [employees, setEmployees] = useState(initialEmployees);
+  const [employees, setEmployees] = useState(() => {
+    const savedEmployees = localStorage.getItem(
+      "employees"
+    );
+    if (savedEmployees) {
+      return JSON.parse(savedEmployees);
+    }
+    return initialEmployees;
+  });
 
   const [search, setSearch] = useState("");
 
   const [editingEmployee, setEditingEmployee] = useState(null);
 
   const [selectedEmployee, setSelectedEmployee] = useState(null);
+
+  useEffect(() => {
+    localStorage.setItem(
+      "employees",
+      JSON.stringify(employees)
+    );
+  }, [employees]);
 
   const handleViewProfile = (employee) => {
     setSelectedEmployee(employee);
@@ -201,6 +216,36 @@ function App() {
 
   const handleCancelEdit = () => {
     setEditingEmployee(null);
+  };
+
+  const handleToggleAvailability = (
+    employeeId
+  ) => {
+    setEmployees((previousEmployees) =>
+      previousEmployees.map((employee) =>
+        employee.id === employeeId
+          ? {
+            ...employee,
+            isAvailable:
+              !employee.isAvailable,
+          }
+          : employee
+      )
+    );
+
+    setSelectedEmployee((previousEmployee) => {
+      if (
+        !previousEmployee ||
+        previousEmployee.id !== employeeId
+      ) {
+        return previousEmployee;
+      }
+      return {
+        ...previousEmployee,
+        isAvailable:
+          !previousEmployee.isAvailable,
+      };
+    });
   };
 
   const filteredEmployees = employees.filter((employee) => {
@@ -276,6 +321,7 @@ function App() {
               onDeleteEmployee={handleDeleteEmployee}
               onEditEmployee={handleEditEmployee}
               onViewProfile={handleViewProfile}
+              onToggleAvailability={handleToggleAvailability}
             />
           ))
         ) : (

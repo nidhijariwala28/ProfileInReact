@@ -54,8 +54,10 @@ function ProfileCard({
     employee,
     onDeleteEmployee,
     onEditEmployee,
-    onViewProfile
+    onViewProfile,
+    onToggleAvailability,
 }) {
+
     const {
         image,
         name,
@@ -68,9 +70,8 @@ function ProfileCard({
         buttonColor,
     } = employee;
 
-    const [isFavorite, setIsFavorite] = useState(false);
-
-    const [available, setAvailable] = useState(isAvailable);
+    const [isFavorite, setIsFavorite] =
+        useState(false);
 
     const handleEdit = () => {
         onEditEmployee(employee);
@@ -79,47 +80,108 @@ function ProfileCard({
     const handleDelete = () => {
         onDeleteEmployee(employee.id);
     };
+
+    const handleAvailability = () => {
+        onToggleAvailability(employee.id);
+    };
+
     return (
         <div className="card">
-            <img src={image} alt={name} className="profile-image" />
-            <h1>{name}</h1>
-            <p className="email">{email}</p>
-            <p className="role">{role}</p>
-            <p className="experience">{experience}</p>
-            <p className="skills">{skills}</p>
-            <p className="city">📍 {city}</p>
-            <p className={available ? "available" : "not-available"}>
-                {available
-                    ? "🟢 Available"
-                    : "🔴 Not Available"}
+            <img
+                src={image}
+                alt={name}
+                className="profile-image"
+            />
+
+            <h1>
+                {name}
+            </h1>
+
+            <p className="email">
+                {email}
             </p>
 
-            <button className="profile-button"
-                style={{ backgroundColor: buttonColor }}
-                onClick={() => onViewProfile(employee)}
+            <p className="role">
+                {role}
+            </p>
+
+            <p className="experience">
+                {experience}
+            </p>
+
+            <p className="skills">
+                {skills}
+            </p>
+
+            <p className="city">
+                📍 {city}
+            </p>
+
+            <p
+                className={
+                    isAvailable
+                        ? "available"
+                        : "not-available"
+                }
+            >
+                {isAvailable
+                    ? "🟢 Available"
+                    : "🔴 Not Available"}
+
+            </p>
+
+            <button
+                className="profile-button"
+                style={{
+                    backgroundColor:
+                        buttonColor,
+                }}
+                onClick={() =>
+                    onViewProfile(employee)
+                }
             >
                 View Profile
             </button>
 
             <button
                 className="favorite-button"
-                onClick={() => setIsFavorite(!isFavorite)}
+                onClick={() =>
+                    setIsFavorite(
+                        !isFavorite
+                    )
+                }
             >
                 {isFavorite
                     ? "❤️ Favorited"
-                    : "🤍 Add Favorite"
-                }
+                    : "🤍 Add Favorite"}
+
             </button>
 
             <button
                 className="availability-button"
-                onClick={() => setAvailable(!available)}
+                onClick={
+                    handleAvailability
+                }
             >
                 Change Availability
             </button>
-            <button className="edit-button" onClick={handleEdit}>✏️ Edit Employee</button>
-            <button className="delete-button" onClick={() => onDeleteEmployee(employee.id)}>Delete Employee</button>
+
+            <button
+                className="edit-button"
+                onClick={handleEdit}
+            >
+                ✏️ Edit Employee
+            </button>
+
+            <button
+                className="delete-button"
+                onClick={handleDelete}
+            >
+                Delete Employee
+            </button>
+
         </div>
+
     );
 }
 

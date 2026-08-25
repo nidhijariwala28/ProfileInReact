@@ -22,8 +22,8 @@ function EmployeeProfile({ employee, onClose }) {
                     {employee.role}
                 </p>
 
-                <p> <strong>Exprience:</strong>{" "}
-                    {employee.exprience}
+                <p> <strong>Experience:</strong>{" "}
+                    {employee.experience}
                 </p>
 
                 <p> <strong>Skills:</strong>{" "}

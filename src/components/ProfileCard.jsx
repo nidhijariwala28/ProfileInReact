@@ -54,6 +54,7 @@ function ProfileCard({
     employee,
     onDeleteEmployee,
     onEditEmployee,
+    onViewProfile
 }) {
     const {
         image,
@@ -94,7 +95,9 @@ function ProfileCard({
             </p>
 
             <button className="profile-button"
-                style={{ backgroundColor: buttonColor }}>
+                style={{ backgroundColor: buttonColor }}
+                onClick={() => onViewProfile(employee)}
+            >
                 View Profile
             </button>
 

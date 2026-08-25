@@ -82,6 +82,7 @@ import "./index.css";
 import ProfileCard from "./components/ProfileCard";
 import Counter from "./components/counter";
 import EmployeeForm from "./components/EmployeeForm";
+import EmployeeProfile from "./components/EmployeeProfile";
 
 import nidhi from "./assets/nidhi.jpeg"
 import rahul from "./assets/rahul.jpeg"
@@ -146,6 +147,16 @@ function App() {
   const [search, setSearch] = useState("");
 
   const [editingEmployee, setEditingEmployee] = useState(null);
+
+  const [selectedEmployee, setSelectedEmployee] = useState(null);
+
+  const handleViewProfile = (employee) => {
+    setSelectedEmployee(employee);
+  };
+
+  const handleCloseProfile = (employee) => {
+    setSelectedEmployee(null);
+  }
 
   const handleAddEmployee = (newEmployee) => {
     setEmployees((previousEmployees) => [
@@ -264,6 +275,7 @@ function App() {
               employee={employee}
               onDeleteEmployee={handleDeleteEmployee}
               onEditEmployee={handleEditEmployee}
+              onViewProfile={handleViewProfile}
             />
           ))
         ) : (
@@ -273,6 +285,11 @@ function App() {
           </div>
         )}
       </div>
+
+      <EmployeeProfile
+        employee={selectedEmployee}
+        onClose={handleCloseProfile}
+      />
     </div>
   );
 }

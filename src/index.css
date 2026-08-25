@@ -397,6 +397,77 @@ body {
   color: #666;
 }
 
+.profile-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.profile-modal {
+  position: relative;
+  width: 420px;
+  max-width: 90%;
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.profile-modal h2 {
+  margin-bottom: 20px;
+}
+
+.modal-profile-image {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 15px;
+}
+
+.profile-modal h1 {
+  margin-bottom: 15px;
+}
+
+.profile-modal p {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+.close-button {
+  position: absolute;
+  top: 12px;
+  right: 15px;
+  border: none;
+  background: transparent;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.modal-close-button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 8px;
+  background: #374151;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.modal-close-button:hover {
+  background: #1f2937;
+}
+
 /* ============================= */
 /* MOBILE */
 /* ============================= */
